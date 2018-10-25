@@ -164,7 +164,7 @@ function d2_andy() {
 		delay(rand(500,750)); 
 	}*/
 	
-	Attack.kill(156);
+	if(!Attack.kill(156)) delay(500);
 	Attack.securePosition(me.x, me.y, 15, 3000);
 	//Attack.clearLevel(0);
 	Pather.moveTo(22563, 9556);
@@ -254,7 +254,7 @@ function d2_duriel() {
 	Pather.makePortal();
 	delay(250);
 
-	Attack.kill(211);
+	if(!Attack.kill(211)) delay(500);
 	Pickit.pickItems();
 	delay(rand(5000,7000));
 	
@@ -284,7 +284,7 @@ function d2_mephisto() {
 	Pather.makePortal();
 	delay(250);
 	
-	Attack.kill(242);
+	if(!Attack.kill(242)) delay(500);
 	Pickit.pickItems();
 	Attack.securePosition(me.x, me.y, 30, 3000);
 	
@@ -1219,9 +1219,7 @@ function d2_diablo() {
 		break;
 	}
 
-	
-	this.diabloPrep();
-	Attack.kill(243); // Diablo
+	if (this.diabloPrep()) Attack.kill(243); // Diablo	
 	Pickit.pickItems();
 	
 	Town.goToTown();
@@ -1384,7 +1382,8 @@ function d2_fastD() {
 			}
 		}
 
-		throw new Error("Diablo not found");
+		me.overhead("Diablo not found");
+		return false;
 	};
 
 	this.openSeal = function (classid) {
@@ -1465,8 +1464,10 @@ function d2_fastD() {
 	//this.openSeal(392);	// seal at Infector
 
 	if (this.infLayout === 1) {
+		me.overhead("Vizier layout = 1");
 		Pather.moveTo(7869, 5294); // uncertain if this is the best x,y coords
 	} else {
+		me.overhead("Vizier layout = 2");
 		Pather.moveTo(7928, 5295); // temp
 	}
 
@@ -1523,9 +1524,10 @@ function d2_fastD() {
 	
 	Pather.moveTo(7788, 5292);
 	Pather.makePortal();
-	this.diabloPrep();
-	Attack.kill(243); // Diablo
+	
+	if(this.diabloPrep()) Attack.kill(243); // Diablo
 	Pickit.pickItems();
+	
 	say("hulk");
 	delay(rand(4000,5000));
  
@@ -1566,7 +1568,7 @@ function d2_Nihlathak() {
 		return true;
 	}*/
 	Pather.makePortal();
-	Attack.kill(526); // Nihlathak
+	if(!Attack.kill(526)) delay(500); // Nihlathak
 	Pickit.pickItems();
 	
 	Town.goToTown();
